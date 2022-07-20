@@ -12,23 +12,29 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 class LoginFormAuthenticator extends AbstractAuthenticator
 {
     public function supports(Request $request): ?bool
-    {
+    {   
+        
+         return self::class === $request->attributes->get('_route')
+            && $request->isMethod('POST');
         // TODO: Implement supports() method.
     }
 
     public function authenticate(Request $request): Passport
-    {
+    {   
+        return $request->request->get('login');
         // TODO: Implement authenticate() method.
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-    {
+    {   
+       dd("success");
         // TODO: Implement onAuthenticationSuccess() method.
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         // TODO: Implement onAuthenticationFailure() method.
+        dd('faillire');
     }
 
 //    public function start(Request $request, AuthenticationException $authException = null): Response
